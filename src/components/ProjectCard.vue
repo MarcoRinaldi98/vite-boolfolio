@@ -29,7 +29,7 @@ export default {
             class="card-img-top">
         <div class="card-body">
             <h5 class="card-title">{{ this.item.title }}</h5>
-            <h5>{{ this.item.technology?.name }}</h5>
+            <h6>{{ this.item.type ? this.item.type.name : 'Nessuna tecnologia' }}</h6>
             <p class="card-text">{{ this.truncateText(this.item.description) }}</p>
             <a href="#" class="btn btn-primary">VEDI</a>
         </div>
