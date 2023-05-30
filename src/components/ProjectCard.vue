@@ -2,7 +2,8 @@
 export default {
     name: "ProjectCard",
     props: {
-        item: Object
+        item: Object,
+        url: String
     },
     data() {
         return {
@@ -23,7 +24,7 @@ export default {
 
 <template>
     <div class="card my-2">
-        <img v-if="this.item.image" :src="`${this.baseUrl}/storage/${this.item.image}`" class="card-img-top">
+        <img v-if="this.item.image" :src="`${this.url}/storage/${this.item.image}`" class="card-img-top">
         <img v-else
             src="https://media.istockphoto.com/id/887464786/it/vettoriale/nessuna-fotocamera-consentita-segno-icona-piatta-in-cerchio-barrato-rosso-vettore.jpg?s=612x612&w=0&k=20&c=kmSQFxPBSqRjO9hTIgyYHxj82GYOB6kGTPc52kNQ_ug="
             class="card-img-top">

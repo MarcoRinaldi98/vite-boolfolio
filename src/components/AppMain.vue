@@ -45,7 +45,7 @@ export default {
         <div class="row">
 
             <div class="col-4" v-for="project in projects">
-                <ProjectCard :item="project"></ProjectCard>
+                <ProjectCard :item="project" :url="this.baseUrl"></ProjectCard>
             </div>
 
             <nav aria-label="Page navigation example">
