@@ -5,5 +5,7 @@ export default {
 </script>
 
 <template>
-    <h1>ABOUT US</h1>
+    <div class="container py-5 text-center">
+        <h1 class="py-5">ABOUT US</h1>
+    </div>
 </template>
