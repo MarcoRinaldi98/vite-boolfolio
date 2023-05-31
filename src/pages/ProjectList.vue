@@ -1,14 +1,16 @@
 <script>
 import axios from 'axios';
 
-import ProjectCard from './ProjectCard.vue';
+import ProjectCard from '../components/ProjectCard.vue';
+
+import { store } from '../store.js'
 
 export default {
-    name: "AppMain",
+    name: "ProjectList",
     data() {
         return {
             projects: [],
-            baseUrl: 'http://localhost:8000',
+            store,
             currentPage: 1,
             lastPage: null
         }
@@ -19,7 +21,7 @@ export default {
     methods: {
         // funzione per accedere tramite axios all'array dei projects creata in laravel
         getProjects(gotoPage) {
-            axios.get(`${this.baseUrl}/api/projects`,
+            axios.get(`${this.store.baseUrl}/api/projects`,
                 {
                     params: {
                         page: gotoPage
@@ -45,7 +47,7 @@ export default {
         <div class="row">
 
             <div class="col-4" v-for="project in projects">
-                <ProjectCard :item="project" :url="this.baseUrl"></ProjectCard>
+                <ProjectCard :project="project"></ProjectCard>
             </div>
 
             <nav aria-label="Page navigation example">

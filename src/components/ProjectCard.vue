@@ -1,13 +1,13 @@
 <script>
+import { store } from '../store.js';
+
 export default {
     name: "ProjectCard",
-    props: {
-        item: Object,
-        url: String
-    },
+    props: ['project'],
     data() {
         return {
-            descriptionMaxLength: 150
+            descriptionMaxLength: 150,
+            store
         }
     },
     methods: {
@@ -24,17 +24,30 @@ export default {
 
 <template>
     <div class="card my-2">
-        <img v-if="this.item.image" :src="`${this.url}/storage/${this.item.image}`" class="card-img-top">
+
+        <img v-if="project.image" :src="`${this.store.baseUrl}/storage/${project.image}`" class="card-img-top">
         <img v-else
             src="https://media.istockphoto.com/id/887464786/it/vettoriale/nessuna-fotocamera-consentita-segno-icona-piatta-in-cerchio-barrato-rosso-vettore.jpg?s=612x612&w=0&k=20&c=kmSQFxPBSqRjO9hTIgyYHxj82GYOB6kGTPc52kNQ_ug="
             class="card-img-top">
+
         <div class="card-body">
-            <h5 class="card-title">{{ this.item.title }}</h5>
-            <h6>{{ this.item.type ? this.item.type.name : 'Nessuna tecnologia' }}</h6>
-            <p class="card-text">{{ this.truncateText(this.item.description) }}</p>
-            <a href="#" class="btn btn-primary">VEDI</a>
+            <h5 class="card-title">{{ project.title }}</h5>
+
+            <h6>{{ project.type ? project.type.name : 'Nessuna tipologia' }}</h6>
+
+            <p class="card-text">{{ truncateText(project.description) }}</p>
+
+            <router-link :to="{ name: 'single-project', params: { slug: project.slug } }" class="btn btn-primary">
+                VEDI DETTAGLI
+            </router-link>
+
         </div>
     </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+img {
+    height: 300px;
+    object-fit: fill;
+}
+</style>
