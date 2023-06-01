@@ -36,6 +36,7 @@ export default {
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!--creo le voci del menu prendendole dinamicamente da un array che contiene tutte le voci in base alle rotte che ho creato-->
                     <li class="nav-item" v-for="item in menuItems">
                         <router-link :to="{ name: item.routeName }" class="nav-link">{{ item.label }}</router-link>
                     </li>

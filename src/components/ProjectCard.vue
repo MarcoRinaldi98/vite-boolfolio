@@ -35,8 +35,15 @@ export default {
 
             <h6>{{ project.type ? project.type.name : 'Nessuna tipologia' }}</h6>
 
+            <div>
+                <span v-for="technology in project.technologies" class="badge rounded-pill text-bg-primary">
+                    {{ technology.name }}
+                </span>
+            </div>
+
             <p class="card-text">{{ truncateText(project.description) }}</p>
 
+            <!--creo un link dinamico che mi riporta alla rotta che corrisponde al 'name', concatenata con la slug del progetto che voglio visualizzare-->
             <router-link :to="{ name: 'single-project', params: { slug: project.slug } }" class="btn btn-primary">
                 VEDI DETTAGLI
             </router-link>
