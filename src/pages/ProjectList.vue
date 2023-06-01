@@ -12,7 +12,8 @@ export default {
             projects: [],
             store,
             currentPage: 1,
-            lastPage: null
+            lastPage: null,
+            loading: true
         }
     },
     components: {
@@ -30,9 +31,11 @@ export default {
             )
                 .then(response => {
                     console.log(response);
+                    this.loading = true;
                     this.projects = response.data.results.data;
                     this.currentPage = response.data.results.current_page;
                     this.lastPage = response.data.results.last_page;
+                    this.loading = false;
                 });
         }
     },
@@ -46,8 +49,12 @@ export default {
     <div class="container mt-2">
         <div class="row">
 
-            <div class="col-4" v-for="project in projects">
+            <div v-if="loading == false" class="col-4" v-for="project in projects">
                 <ProjectCard :project="project"></ProjectCard>
+            </div>
+
+            <div class="vh-100 vw-100 d-flex justify-content-center align-items-center" v-else>
+                <img class="ms_loader" src="/loading.gif" alt="Caricamento in corso...">
             </div>
 
             <nav aria-label="Page navigation example">
@@ -59,7 +66,7 @@ export default {
                         </button>
                     </li>
                     <li v-for="(page, index) in this.lastPage" @click="getProjects(index + 1)"
-                        :class="{ 'disabled': currentPage == index + 1 }" class="page-item">
+                        :class="{ 'active': currentPage == index + 1 }" class="page-item">
                         <button class="page-link" href="#">
                             {{ index + 1 }}
                         </button>

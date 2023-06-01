@@ -36,7 +36,7 @@ export default {
             <h6>{{ project.type ? project.type.name : 'Nessuna tipologia' }}</h6>
 
             <div>
-                <span v-for="technology in project.technologies" class="badge rounded-pill text-bg-primary">
+                <span v-for="technology in project.technologies" class="badge rounded-pill text-bg-primary me-1">
                     {{ technology.name }}
                 </span>
             </div>

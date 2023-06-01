@@ -7,7 +7,7 @@ export default {
     name: "SingleProject",
     data() {
         return {
-            project: [],
+            project: null,
             store
         }
     },
@@ -18,8 +18,14 @@ export default {
         axios.get(`${this.store.baseUrl}/api/project/${slug}`)
             .then(response => {
                 console.log(response);
-                // inserisco nell'array project tutti i dati recuperati per il progetto corrispondente allo slug 
-                this.project = response.data.project;
+                if (response.data.success == true) {
+                    // inserisco nell'array project tutti i dati recuperati per il progetto corrispondente allo slug 
+                    this.project = response.data.project;
+                } else {
+                    // alert(response.data.error); se voglio visualizzare il messaggio di errore impostato nel back
+
+                    this.$router.push({ name: 'not-found' });
+                }
             });
 
         console.log(slug);
@@ -29,13 +35,14 @@ export default {
 </script>
 
 <template>
-    <div class="container text-center">
+    <!--verifica con il v-if se project non è piu null, allora visualizza i suoi dati-->
+    <div class="container text-center" v-if="project">
         <h1 class="mt-3 text-center">{{ project.title }}</h1>
 
         <h5 class="text-center mt-2 text-uppercase text-primary">{{ project.type?.name }}</h5>
 
         <div class="py-3">
-            <span v-for="technology in project.technologies" class="badge rounded-pill text-bg-primary">
+            <span v-for="technology in project.technologies" class="badge rounded-pill text-bg-primary me-1">
                 {{ technology.name }}
             </span>
         </div>
@@ -52,5 +59,8 @@ export default {
         <p class="pt-4">{{ project.description }}</p>
 
         <router-link to="/blog" class="mt-5 btn btn-secondary">TORNA A PROGETTI</router-link>
+    </div>
+    <div class="vh-100 vw-100 d-flex justify-content-center align-items-center" v-else>
+        <img class="ms_loader" src="/loading.gif" alt="Caricamento in corso..." />
     </div>
 </template>

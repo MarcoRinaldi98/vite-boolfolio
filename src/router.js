@@ -7,6 +7,7 @@ import AppContact from './pages/AppContact.vue';
 import AppAbout from './pages/AppAbout.vue';
 import ProjectList from './pages/ProjectList.vue';
 import SingleProject from './pages/SingleProject.vue';
+import NotFound from './pages/NotFound.vue';
 
 //creiamo una costante che ci fornisce le rotte necessarie che gli passiamo
 const router = createRouter(
@@ -39,6 +40,12 @@ const router = createRouter(
                 path: '/blog/:slug', // rotta dinamica
                 name: 'single-project',
                 component: SingleProject
+            },
+            {
+                // rotta per tutte le pagine alla quale non è stata creata una rotta personalizzata
+                path: '/:pathMatch(.*)*',
+                name: 'not-found',
+                component: NotFound
             }
         ]
     }
