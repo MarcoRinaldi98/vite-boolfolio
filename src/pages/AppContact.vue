@@ -1,11 +1,17 @@
 <script>
+import ContactForm from '../components/ContactForm.vue';
+
 export default {
-    name: 'AppContact'
+    name: 'AppContact',
+    components: {
+        ContactForm
+    }
 }
 </script>
 
 <template>
-    <div class="container py-5 text-center">
-        <h1 class="py-5">CONTACT</h1>
+    <div class="container">
+        <h1>Contattami</h1>
+        <ContactForm></ContactForm>
     </div>
 </template>
